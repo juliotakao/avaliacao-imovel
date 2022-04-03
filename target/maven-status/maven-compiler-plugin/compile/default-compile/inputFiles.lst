@@ -1,0 +1,13 @@
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\service\ImovelService.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\SpecBuilder.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\exceptions\ParametroException.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\service\ImovelServiceImpl.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\repository\ImovelRepository.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\exceptions\TipoFiltroNaoImplementadoException.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\ImoveisApiApplication.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\SpecFactory.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\SearchCriteria.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\api\v1\controller\ImovelController.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\PageRequestBuilder.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\model\Imovel.java
+C:\Projetos\fim\imoveis-api\src\main\java\br\com\meuimovel\filter\TipoFiltroEnum.java
