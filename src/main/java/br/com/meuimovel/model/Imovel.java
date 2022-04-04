@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.model;
+package br.com.meuimovel.model;
 
 import java.math.BigDecimal;
 
@@ -13,10 +13,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Imovel extends RepresentationModel<Imovel>{
 	               

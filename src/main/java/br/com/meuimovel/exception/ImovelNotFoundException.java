@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.exception;
+package br.com.meuimovel.exception;
 
 public class ImovelNotFoundException extends RuntimeException {
 	/**

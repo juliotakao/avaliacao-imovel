@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.filter;
+package br.com.meuimovel.filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import br.com.meuimovel.domain.filter.exceptions.ParametroException;
+import br.com.meuimovel.filter.exceptions.ParametroException;
 
 @Component
 public class SpecBuilder<T> {
@@ -21,7 +21,7 @@ public class SpecBuilder<T> {
     private List<SearchCriteria> listaSearchCriteria;
     
     public SpecBuilder<T> with(String query) {
-    	listaSearchCriteria = new ArrayList<SearchCriteria>();
+    	listaSearchCriteria = new ArrayList<>();
     	Pattern pattern = Pattern.compile("(\\w+?)(=|<|>)(\\w+?),");
         Matcher matcher = pattern.matcher(query + ",");
            
@@ -37,7 +37,7 @@ public class SpecBuilder<T> {
     }
  
 	public Specification<T> build() {
-        if (listaSearchCriteria.size() == 0) {
+        if (listaSearchCriteria.isEmpty()) {
             throw new ParametroException();
         }
  

@@ -1,4 +1,9 @@
 spring:
+  mandatory-file-encoding: UTF-8
+  messages:
+    basename: locale/messages
+    cache-duration: -1
+    encoding: UTF-8
   datasource:
     driverClassName: org.h2.Driver
     password: ''

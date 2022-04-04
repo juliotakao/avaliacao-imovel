@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.filter;
+package br.com.meuimovel.filter;
 
 import lombok.Data;
 

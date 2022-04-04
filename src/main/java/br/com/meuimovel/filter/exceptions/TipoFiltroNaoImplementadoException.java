@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.filter.exceptions;
+package br.com.meuimovel.filter.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

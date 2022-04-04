@@ -1,8 +1,8 @@
-package br.com.meuimovel.domain.filter;
+package br.com.meuimovel.filter;
 
 import java.util.stream.Stream;
 
-import br.com.meuimovel.domain.filter.exceptions.TipoFiltroNaoImplementadoException;
+import br.com.meuimovel.filter.exceptions.TipoFiltroNaoImplementadoException;
 
 public enum TipoFiltroEnum {
 

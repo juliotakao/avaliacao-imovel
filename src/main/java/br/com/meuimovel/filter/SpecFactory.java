@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.filter;
+package br.com.meuimovel.filter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SpecFactory<T> {
-	
+
 	private Map<TipoFiltroEnum, Function<SearchCriteria, Specification<T>>> specs;
-	
+
 	@PostConstruct
 	private void init() {
 		specs = new HashMap<>();
@@ -21,34 +21,29 @@ public class SpecFactory<T> {
 		specs.put(TipoFiltroEnum.MAIOR, this::getGreaterThanSpecification);
 		specs.put(TipoFiltroEnum.MENOR, this::getLessThanSpecification);
 	}
-	
+
 	public Specification<T> getByCriteria(SearchCriteria criteria) {
 		return specs.get(criteria.getTipoFiltro()).apply(criteria);
 	}
-	
+
 	private Specification<T> getEqualsSpecification(SearchCriteria criteria) {
 		return (root, query, builder) -> {
 			if (root.get(criteria.getChave()).getJavaType() == String.class) {
-                return builder.like(
-                  root.<String>get(criteria.getChave()), "%" + criteria.getValor() + "%");
-            } else {
-                return builder.equal(root.get(criteria.getChave()), criteria.getValor());
-            }
+				return builder.like(root.<String>get(criteria.getChave()), "%" + criteria.getValor() + "%");
+			} else {
+				return builder.equal(root.get(criteria.getChave()), criteria.getValor());
+			}
 		};
 	}
-	
+
 	private Specification<T> getGreaterThanSpecification(SearchCriteria criteria) {
-		return (root, query, builder) -> {
-			return builder
-				.greaterThan(root.<String> get(criteria.getChave()), criteria.getValor().toString());
-		};
+		return (root, query, builder) -> builder.greaterThan(root.<String>get(criteria.getChave()), criteria.getValor().toString());
+
 	}
-	
+
 	private Specification<T> getLessThanSpecification(SearchCriteria criteria) {
-		return (root, query, builder) -> {
-			return builder
-				.lessThan(root.<String> get(criteria.getChave()), criteria.getValor().toString());
-		};
+		return (root, query, builder) -> builder.lessThan(root.<String>get(criteria.getChave()), criteria.getValor().toString());
+		
 	}
 
 }

@@ -18,17 +18,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.meuimovel.domain.exception.ImovelNotFoundException;
-import br.com.meuimovel.domain.model.Imovel;
-import br.com.meuimovel.domain.repository.ImovelRepository;
-import br.com.meuimovel.domain.service.ImovelService;
+import br.com.meuimovel.exception.ImovelNotFoundException;
+import br.com.meuimovel.model.Imovel;
+import br.com.meuimovel.repository.ImovelRepository;
+import br.com.meuimovel.service.ImovelService;
 
 @RestController
 @RequestMapping(path = "/api/v1/imoveis", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ImovelController {
+	
+	private static final String SORT = "id desc";
+
 
 	@Autowired
 	private ImovelService imovelService;
@@ -45,7 +47,7 @@ public class ImovelController {
 		if (lista.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(lista, HttpStatus.OK);
+		return ResponseEntity.ok(lista);
 
 	}
 
@@ -57,36 +59,43 @@ public class ImovelController {
 			throw new ImovelNotFoundException(id);
 
 		Imovel imovel = opImovel.get();
-		
-		imovel.add(linkTo(methodOn(this.getClass()).listar("", 1, 10, "id desc")).withRel("GET"));
+
+		imovel.add(linkTo(methodOn(this.getClass()).listar("", 1, 10, SORT)).withRel("GET"));
 		imovel.add(linkTo(this.getClass()).slash(id).withSelfRel().withRel("DELETE"));
 
-		return new ResponseEntity<>(imovel, HttpStatus.OK);
+		return ResponseEntity.ok(imovel);
 	}
 
 	@PostMapping
-	public Imovel criar(@RequestBody Imovel newImovel) {
-        return imovelRepository.save(newImovel);
+	
+	public ResponseEntity<Imovel> criar(@RequestBody Imovel newImovel) {
+		imovelRepository.save(newImovel);
+		return new ResponseEntity<>(newImovel, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/{id}")
+	 public ResponseEntity<Imovel> alterar(@RequestBody Imovel newImovel, @PathVariable Long id) {
+		 
+		 Imovel retorno = imovelRepository.findById(id)
+         .map(imovel -> imovelRepository.save(newImovel))
+         .orElseGet(() -> {
+        	 throw new ImovelNotFoundException(id);
+         });
+
+        return ResponseEntity.ok(retorno); 
     }
 
-	 @PutMapping("/{id}")
-	 public Imovel alterar(@RequestBody Imovel newImovel, @PathVariable Long id) {
-
-        return imovelRepository.findById(id)
-            .map(imovel -> {
-            	imovel.setDescricao(newImovel.getDescricao());
-               
-                return imovelRepository.save(imovel);
-            })
-            .orElseGet(() -> {
-                return imovelRepository.save(newImovel);
-            });
-    }
 
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long id) {
-		imovelRepository.deleteById(id);
+	public ResponseEntity<Void> remover(@PathVariable Long id) {
+		
+		try {
+			imovelRepository.deleteById(id);
+			return ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}	
+		 
 	}
 
 }

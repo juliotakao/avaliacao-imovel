@@ -1,4 +1,4 @@
-package br.com.meuimovel.domain.service;
+package br.com.meuimovel.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.stereotype.Service;
 
-import br.com.meuimovel.domain.filter.PageRequestBuilder;
-import br.com.meuimovel.domain.filter.SpecBuilder;
-import br.com.meuimovel.domain.model.Imovel;
-import br.com.meuimovel.domain.repository.ImovelRepository;
+import br.com.meuimovel.filter.PageRequestBuilder;
+import br.com.meuimovel.filter.SpecBuilder;
+import br.com.meuimovel.model.Imovel;
+import br.com.meuimovel.repository.ImovelRepository;
 
 @Service
 @Transactional
-@ConditionalOnSingleCandidate(br.com.meuimovel.domain.service.ImovelService.class)
+@ConditionalOnSingleCandidate(br.com.meuimovel.service.ImovelService.class)
 public class ImovelServiceImpl implements ImovelService {
 
 	@Autowired
@@ -36,26 +36,5 @@ public class ImovelServiceImpl implements ImovelService {
 		} catch (Exception e) {
 			return new ArrayList<>();
 		}
-	}
-	
-	@Override
-	public Imovel obter(Long id) {
-		return imovelRepository.getById(id);
-	}
-	
-	@Override
-	public Imovel incluir(Imovel imovel) {
-		return imovelRepository.save(imovel);		
-	}
-	
-	@Override
-	public Imovel atualizar(Long idImovel, Imovel imovel) {
-		return imovelRepository.save(imovel);		
-	}
-	
-	@Override
-	public void remover(Long id) {
-		imovelRepository.deleteById(id);		
-	}
-
+	}	
 }
