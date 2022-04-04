@@ -55,8 +55,9 @@ public class ImovelController {
 	public ResponseEntity<Imovel> obter(@PathVariable long id) {
 		Optional<Imovel> opImovel = imovelRepository.findById(id);
 
-		if (!opImovel.isPresent())
-			throw new ImovelNotFoundException(id);
+		if (!opImovel.isPresent())			
+		    return ResponseEntity.notFound().build();
+		    
 
 		Imovel imovel = opImovel.get();
 

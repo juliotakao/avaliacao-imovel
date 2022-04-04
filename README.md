@@ -9,6 +9,7 @@ Banco de dados será carregado com 10 registros. Será criado arquivo na pasta C
 * [Spring Data Jpa](https://spring.io/projects/spring-data-jpa)
 * [Spring Hateoas](https://spring.io/projects/spring-hateoas)
 * [Lombok](https://projectlombok.org/)
+* [restassured](https://rest-assured.io/)
 * [H2 DataBase - Console local](http://localhost:8080/h2)
 
 
